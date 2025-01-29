@@ -1,6 +1,6 @@
 import React from 'react'
 import Logo from '../../assets/images/logo.png'
-import Container from '../Container'
+import { Container } from '../index'
 
 export default function Footer(props) {
     

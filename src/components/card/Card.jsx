@@ -1,10 +1,9 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import Button from '../Button'
-import Card1 from "../../assets/img/Grill.jpg";
-import Card2 from "../../assets/img/salad.jpg";
-import Card3 from "../../assets/img/head_chef.jpg";
-import Container from "../Container";
+import { Container, Button } from '../index'
+import Haleem from "../../assets/images/Beef Haleem.jpg";
+
+
 
 function card() {
   
@@ -14,75 +13,46 @@ function card() {
       name: 'Beef Haleem',
       price: 1500,
       description: 'A hearty stew with slow-cooked beef, lentils, spices, and topped with fried onions, fresh coriander, and lemon.',
-      image: Card1
+      image: Haleem
   },
   {
       id: 2,
       name: 'Beef Haleem',
       price: 1500,
       description: 'A hearty stew with slow-cooked beef, lentils, spices, and topped with fried onions, fresh coriander, and lemon.',
-      image: Card2
+      image: Haleem
   },
   {
     id: 3,
     name: 'Beef Haleem',
     price: 1500,
     description: 'A hearty stew with slow-cooked beef, lentils, spices, and topped with fried onions, fresh coriander, and lemon.',
-    image: Card2
+    image: Haleem
 },
 {
   id: 4,
   name: 'Beef Haleem',
   price: 1500,
   description: 'A hearty stew with slow-cooked beef, lentils, spices, and topped with fried onions, fresh coriander, and lemon.',
-  image: Card2
+  image: Haleem
 },
 {
   id: 5,
   name: 'Beef Haleem',
   price: 1500,
   description: 'A hearty stew with slow-cooked beef, lentils, spices, and topped with fried onions, fresh coriander, and lemon.',
-  image: Card2
+  image: Haleem
 },
   ]
 
   return (
-      
-      // <Container>
-        
-      //   {/* <div className="flex ml-[-16px] mt-4 md:flex-row sm:flex-col md:space-x-4 font-serif ">
-        
-      //     <div className="w-[30%] border border-gray-300 rounded-2xl p-4">
-        
-      //       <div className="p-2">
 
-      //         {cardItem.map((card) => (
-      //           <div key={card.id}>
-      //             <h1 className="text-4xl font-bold mb-6">{card.title}</h1>
-      //             <img className="mb-2" src={card.image} alt="Menu Image1" />
-      //             <p className="text-xl font-serif mt-4 mb-4">
-      //               {card.description}
-      //             </p>
-      //             <NavLink to={card.link} className="font-serif text-xl text-primary hover:underline hover:underline-offset-8 cursor-pointer">
-      //               {card.link_description}
-      //             </NavLink>
-      //           </div>
-                
-      //         ))}
-        
-      //       </div>
-        
-      //     </div>
+    
+    <section className="">
+          
+          <Container>
 
-      
-      //   </div> */}
-      // </Container>
-
-      <Container>
-       
-        <section>
-
-          <div className="py-8 flex flex-col gap-8">
+          <div className="flex flex-col gap-8">
             
             <div className="flex justify-between items-center flex-wrap gap-2">
               
@@ -132,9 +102,10 @@ function card() {
           
           </div>
 
-        </section>
-      
       </Container>
+      
+      </section>
+      
     
   );
 }

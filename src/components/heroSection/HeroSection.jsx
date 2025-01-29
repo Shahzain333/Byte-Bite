@@ -1,8 +1,6 @@
 import React from 'react'
 import heroImage from '../../assets/images/hero_img.jpg'
-import Container from '../Container'
-import Button from '../Button'
-import Card from '../card/Card'
+import { Container, Button, Card, FreindsSection, FAQs } from '../index'
 import {Link} from 'react-router-dom'
 import { useState } from 'react'
 
@@ -11,7 +9,8 @@ export default function HeroSection(props) {
     const [isMobile,setIsMobile] = useState(false)
 
     return (
-        <section className='py-28'>
+        
+        <section className='pb-5 py-28'>
             
             <Container>
                 
@@ -39,11 +38,10 @@ export default function HeroSection(props) {
                     </div>
 
                 </div>
-            
-                <Card/>
                 
             </Container>
         
         </section>
+        
     )
 }
