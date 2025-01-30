@@ -1,8 +1,7 @@
 import React, {useState} from 'react'
 import logo from '../../assets/images/logo.png'
 import { Container, Button } from '../index'
-import {NavLink} from 'react-router-dom'
-import { Outlet } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 export default function Header() {
 
