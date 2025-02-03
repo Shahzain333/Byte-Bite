@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import logo from '../../assets/images/logo.png'
 import { Container, Button } from '../index'
 import { NavLink } from 'react-router-dom'

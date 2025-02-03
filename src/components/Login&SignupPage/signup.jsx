@@ -9,6 +9,7 @@ import hidePasswordImage from '../../assets/images/blind-40.png'
 
 
 export default function Signup(props) {
+    
     const ref = useRef();
     const passRef = useRef();
     const pass2Ref = useRef();

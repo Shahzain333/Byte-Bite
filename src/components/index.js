@@ -8,6 +8,7 @@ import FreindsSection from "./FreinedsSection.jsx";
 import FAQs from "./faqs/FAQs.jsx";
 import Login from "./Login&SignupPage/login.jsx";
 import Signup from "./Login&SignupPage/signup.jsx";
+import ReservationForm from "./reservation/ReservatonForm.jsx"
 
 export { 
     Button,
@@ -19,5 +20,6 @@ export {
     FreindsSection,
     FAQs,
     Login,
-    Signup
+    Signup,
+    ReservationForm
 };
