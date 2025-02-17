@@ -1,6 +1,5 @@
 import React from 'react'
-import Header from '../components/header/Header'
-import { HeroSection, Card, FreindsSection, FAQs } from '../components'
+import { HeroSection, Card, FreindsSection, FAQs } from '../components/index'
 
 
 export default function Home(props) {

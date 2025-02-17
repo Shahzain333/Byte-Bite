@@ -1,7 +1,7 @@
 import React from 'react'
 import heroImage from '../../assets/images/hero_img.jpg'
-import { Container, Button, Card, FreindsSection, FAQs } from '../index'
-import {Link} from 'react-router-dom'
+import { Container, Button } from '../index'
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
 export default function HeroSection(props) {
