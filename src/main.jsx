@@ -5,7 +5,7 @@ import './index.css'
 import App from './App.jsx'
 
 import { Toaster } from 'sonner';
-import {createBrowserRouter, RouterProvider} from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 // import user pages
 import Home from './pages/Home'
@@ -61,6 +61,7 @@ import { Signup, Login} from './components/index.js';
         }
       ]
     }
+    
   ])
 
 createRoot(document.getElementById('root')).render(

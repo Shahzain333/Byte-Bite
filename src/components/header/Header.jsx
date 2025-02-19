@@ -18,9 +18,7 @@ export default function Header() {
 
     return (
         <>
-        <header 
-            className='h-16 shadow-md bg-white fixed w-full top-0 right-0 left-0 z-10'
-        >
+        <header className='h-16 shadow-md bg-white fixed w-full top-0 right-0 left-0 z-10'>
             <Container >
                 <div className='flex justify-between items-center transition-all duration-1000 ease-in-out'>
                     <div>
@@ -51,9 +49,7 @@ export default function Header() {
 
                     {/* header for smaller devices */}
                     <div className='md:hidden mr-2'>
-                        <Button 
-                            onClick={() => SetisMobileMenuOpen(!isMobileMenuOpen)}
-                        >
+                        <Button onClick={() => SetisMobileMenuOpen(!isMobileMenuOpen)}>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
                             </svg>
@@ -74,13 +70,13 @@ export default function Header() {
                                             </li>
                                         )
                                     )}
-                                    <li>
+                                    {/* <li>
                                         <Link to={'/login'}>
                                             <Button onClick={() => SetisMobileMenuOpen(false)} className='bg-secondary hover: hover:bg-[#3a4a43] transform hover:scale-105 duration-300 text-white px-6 py-2 rounded-full cursor-pointer'>
                                                 Login
                                             </Button>
                                         </Link>
-                                    </li>
+                                    </li> */}
                                 </ul>
                             </div>
                         )}

@@ -2,6 +2,7 @@ import conf from '../conf/conf';
 import { Client, Account, ID } from 'appwrite';
 
 class AuthUser {
+    
     client = new Client();
     account;
 
@@ -25,16 +26,6 @@ class AuthUser {
             console.log("Error creating account: ", error);
         }
     }
-
-    /**
-     * Logs in an existing user account.
-     * 
-     * This method logs in an existing user account with the provided email address and password.
-     * 
-     * @param {string} email - The email address for the user account.
-     * @param {string} password - The password for the user account.
-     * @returns {Promise} A promise that resolves to the user account object.
-     */
 
     async login({email, password}) {
         try {

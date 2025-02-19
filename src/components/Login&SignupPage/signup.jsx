@@ -42,6 +42,7 @@ export default function Signup(props) {
         }
 
         try {
+
             setCreatingAccount(true);
             const userData = await authService.createAccount(data.email, data.password, data.fullname);
             setCreatingAccount(false);
@@ -63,12 +64,18 @@ export default function Signup(props) {
     
     return (
         <section className='pt-25 pb-10 flex flex-col items-center'>
-                <div className='bg-[#ebf1f4] p-8 lg:pl-10 pb-10 rounded-3xl shadow-md flex flex-row md:gap-12 lg:gap-8 justify-between'>
+                
+                <div className='bg-[#ebf1f4] p-8 lg:pl-10 pb-10 rounded-3xl shadow-md flex flex-row md:gap-12 
+                lg:gap-8 justify-between'>
+                    
                     <div className='flex flex-col md:gap-12 md:w-[40%]'>
+                        
                         <div className='hidden md:block text-center w-28'>
                             <h2 className='border-2 border-secondary py-1 font-medium px-4 rounded-2xl'>Byte&Bite</h2>
                         </div>  
+                        
                         <div className='flex flex-col gap-2 items-center'>
+                           
                             <h2 className='mb-6 text-2xl font-bold text-center underline underline-offset-8 decoration-1 decoration-secondary'>Signup</h2>
                             
                             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>
@@ -86,6 +93,7 @@ export default function Signup(props) {
                                     type='text' 
                                     className={`min-w-64 md:min-w-72 ${redBorderONError(errors.fullname)}`} placeholder='Enter your full name' 
                                 />
+                                
                                 {errors.fullname && <p className="text-red-500 text-sm -mt-4">{errors.fullname.message}</p>}
                                 
                                 <Input
@@ -103,6 +111,7 @@ export default function Signup(props) {
                                     className={`min-w-64 md:min-w-72 ${redBorderONError(errors.email)}`} 
                                     placeholder='Enter your email'
                                 />
+
                                 {errors.email && <p className="text-red-500 text-sm -mt-4">{errors.email.message}</p>}
                                 
                                 <div className='min-w-64 md:min-w-72 flex flex-row items-center'>
@@ -127,7 +136,9 @@ export default function Signup(props) {
                                         src={isPasswordHidden ? hidePasswordImage : showPasswordImage} 
                                         alt="password hidden" 
                                     />
+                                
                                 </div>
+                                
                                 {errors.password && <p className="text-red-500 text-sm -mt-4">{errors.password.message}</p>}
                                 
                                 <div className='min-w-64 md:min-w-72 flex flex-row items-center'>
@@ -147,23 +158,29 @@ export default function Signup(props) {
                                         placeholder='Confirm your password'
                                         onClick={() => setisPassword2Focused(true)}
                                     />
+                                
                                     <img  
                                         className='w-6 h-6 cursor-pointer -translate-x-8 translate-y-4'
                                          onClick={() => setisPasswordHidden(!isPasswordHidden)}
                                         src={isPasswordHidden ? hidePasswordImage : showPasswordImage} 
                                         alt="password hidden" 
                                     />
+                                
                                 </div>
+                                
                                 {errors.password2 && <p className="text-red-500 text-sm -mt-4">{errors.password2.message}</p>}
+                                
                                 {!isPasswordsMatch && <p className="text-red-500 text-sm -mt-4">Passwords do not match.</p>}
+                                
                                 <div>
                                     <Button 
                                         disabled={creatingAccount} 
                                         type="submit" 
                                         className={`min-w-64 md:min-w-72 bg-primary cursor-pointer font-medium text-white py-2 rounded hover:bg-amber-600 transition duration-300 ease-in-out ${creatingAccount ? 'opacity-50 cursor-not-allowed' : ''}`}>
-                                        {creatingAccount ? 'Creating Account...' : 'Login'}
+                                        {creatingAccount ? 'Creating Account...' : 'Signup'}
                                     </Button>
                                 </div>
+
                             </form>
                                                        
                             <p className='text-center text-sm'>Already have an account? 
