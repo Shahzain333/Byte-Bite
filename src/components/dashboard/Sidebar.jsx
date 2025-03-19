@@ -20,7 +20,7 @@ const Sidebar = ({ onLogout }) => {
           Add Dish
         </NavLink>
 
-        <NavLink to="/add-category" className="block py-2 px-4 hover:bg-gray-700 rounded">
+        <NavLink to="/dashboard/add-category" className="block py-2 px-4 hover:bg-gray-700 rounded">
           Add Category
         </NavLink>
 

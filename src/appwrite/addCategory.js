@@ -1,13 +1,12 @@
-
-import { Client, Account, ID, Databases, Storage, Query } from 'appwrite';
+import { Client, Account, ID, Databases, Query, Storage} from 'appwrite';
 import conf from '../conf/conf';
 
-class Dish {
+class appwriteCategory {
+ 
     client = new Client();
     account;
     databases;
-    bucket;
-
+    bucket;   
     constructor() {
         this.client.setEndpoint(conf.appWriteUrl)
         .setProject(conf.appWriteProjectId)
@@ -16,64 +15,51 @@ class Dish {
         this.bucket = new Storage(this.client);
     }
 
-    async addDish({name, price, description, image, category}, imageId) {
-        const imageName = image[0].name;
-        return await this.databases.createDocument(
-            conf.appWriteDatabaseId,
-            conf.appWriteDishesCollectionId,
-            imageId,
-            {name, description, image : imageName, category, price : parseInt(price)}
-        );
+    async addCategory({ name },imageId) {
+        try {
+            return await this.databases.createDocument(
+                conf.appWriteDatabaseId,
+                conf.appWriteCategoryCollectionId,
+                imageId,
+                { category: name }
+            );
+        } catch (error) {
+            throw error;
+        }
     }
 
-    async getDishes() {
-        return await this.databases.listDocuments(
-            conf.appWriteDatabaseId,
-            conf.appWriteDishesCollectionId,
-            [
-                Query.orderDesc("$createdAt"),
-                Query.limit(10)
-            ]
-        );
-    }
-
-    async getFilterDishes(category) {
+    async getCategories() {
         try {
             return await this.databases.listDocuments(
                 conf.appWriteDatabaseId,
-                conf.appWriteDishesCollectionId,
+                conf.appWriteCategoryCollectionId,
                 [
                     Query.orderDesc("$createdAt"),
-                    Query.equal('category', category)
                 ]
             );
         } catch (error) {
-            console.log(error);
+            throw error;
         }
     }
 
-    async updateDish({name, price,category,image ,description, ID}) {
-
-        if (image.length === 0) {
-            return `Image is not provided`;
-        }
+    async updateCategory({category, ID}) {
         try {
             return await this.databases.updateDocument(
                 conf.appWriteDatabaseId,
-                conf.appWriteDishesCollectionId,
+                conf.appWriteCategoryCollectionId,
                 ID,
-                {name, description, image : image[0].name, category, price : parseInt(price)}
+                {category}
             );
         } catch (error) {
-            return 'Failed to update dish';
+            return 'Failed to update category';
         }
     }
 
-    async deleteDish({ID}) {
+    async deleteCategory({ID}) {
         try {
             return await this.databases.deleteDocument(
                 conf.appWriteDatabaseId,
-                conf.appWriteDishesCollectionId,
+                conf.appWriteCategoryCollectionId,
                 ID
             );
         } catch (error) {
@@ -87,7 +73,7 @@ class Dish {
         }
         try {
             return await this.bucket.createFile(
-                conf.appWriteDishesBucketId,
+                conf.appWriteCategoryBucketId,
                 id ? id : ID.unique(),
                 image,
             )
@@ -103,7 +89,7 @@ class Dish {
                 return null;
             }else {
                 return await this.bucket.deleteFile(
-                    conf.appWriteDishesBucketId,
+                    conf.appWriteCategoryBucketId,
                     id
                 );
             }
@@ -113,17 +99,16 @@ class Dish {
     }
 
     getDishImagePreview(imageId) {
-
         try {
             return this.bucket.getFilePreview(
-                conf.appWriteDishesBucketId,
+                conf.appWriteCategoryBucketId,
                 imageId
             );
-        } catch (error) {            
+        } catch (error) {   
             return null;
         }
     };
 }
 
-const dish = new Dish();
-export default dish;
+const addCategory = new appwriteCategory();
+export default addCategory;

@@ -1,6 +1,6 @@
 
 import React from 'react'
-import Input from '../Input'
+import Input from '../input'
 import Button from '../Button'
 import Table from './Table'
 import { useState, useEffect } from 'react'
@@ -10,7 +10,9 @@ import dish from '../../appwrite/addDish'
 import { toast } from 'sonner'
 
 export default function AddDishes(props) {
+
     const { register, handleSubmit, formState: { errors }, setFocus, setValue } = useForm()
+    
     const [isDishAdded, setIsDishAdded] = useState(false);
 
     useEffect(() => {

@@ -1,113 +1,89 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
+
+import React,{useEffect, useState} from 'react'
+import { Link } from 'react-router-dom'
 import { Container, Button } from '../index'
-import Haleem from "../../assets/images/Beef Haleem.jpg";
+import beefHaleemImage from '../../assets/images/Beef Haleem.jpg'
+import { useParams } from 'react-router-dom';
+import { use } from 'react';
+import appwriteDishService from '../../appwrite/addDish'
+import { useSelector, useDispatch } from 'react-redux';
+import { addToCart } from '../../store/addToCartSlice'
+import { toast } from 'sonner';
 
+export default function WeekMenu(props) {
+    const { categoryName } = useParams();
+    const [filteredDishes, setFilteredDishes] = useState([]);
+    const authStatus = useSelector((state) => state.auth.status);
+    const dispatch = useDispatch();
 
-
-function card() {
-  
-  const cardItem = [
-    {
-      id: 1,
-      name: 'Beef Haleem',
-      price: 1500,
-      description: 'A hearty stew with slow-cooked beef, lentils, spices, and topped with fried onions, fresh coriander, and lemon.',
-      image: Haleem
-  },
-  {
-      id: 2,
-      name: 'Beef Haleem',
-      price: 1500,
-      description: 'A hearty stew with slow-cooked beef, lentils, spices, and topped with fried onions, fresh coriander, and lemon.',
-      image: Haleem
-  },
-  {
-    id: 3,
-    name: 'Beef Haleem',
-    price: 1500,
-    description: 'A hearty stew with slow-cooked beef, lentils, spices, and topped with fried onions, fresh coriander, and lemon.',
-    image: Haleem
-},
-{
-  id: 4,
-  name: 'Beef Haleem',
-  price: 1500,
-  description: 'A hearty stew with slow-cooked beef, lentils, spices, and topped with fried onions, fresh coriander, and lemon.',
-  image: Haleem
-},
-{
-  id: 5,
-  name: 'Beef Haleem',
-  price: 1500,
-  description: 'A hearty stew with slow-cooked beef, lentils, spices, and topped with fried onions, fresh coriander, and lemon.',
-  image: Haleem
-},
-  ]
-
-  return (
-
+    const fetchDishesByCategory = async () => {
+        try {
+            const response = await appwriteDishService.getFilterDishes(categoryName);
+            if (response) {
+                const data = response.documents.map((item) => {
+                    return {
+                        id: item.$id,
+                        name: item.name,
+                        price: item.price,
+                        description: item.description,
+                    };
+                });
+                setFilteredDishes(data);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    useEffect(() => {
+        fetchDishesByCategory();
+    }, [categoryName])
     
-    <section className="">
-          
-          <Container>
+    const orderBtnHandler = (id, name, price) => {
+        if (authStatus) {
+            dispatch(addToCart({id, name, price}));
+            toast.success('Dish added to cart');
+        }
+    }
 
-          <div className="flex flex-col gap-8">
-            
-            <div className="flex justify-between items-center flex-wrap gap-2">
-              
-              <h2 className="text-[1.2rem] font-medium md:font-semibold md:text-3xl lg:text-4xl">This Weeks Special!</h2>
-              
-              <Link to="/menu">
-                <Button type="button" className="bg-primary text-sm font-medium w-32 sm:max-w-36 text-center 
-                cursor-pointer hover:bg-amber-500  transition-transform duration-300 transform hover:scale-110">
-                  View Full Menu
-                </Button>
-              </Link>
-            
-            </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:grid-cols-4">
-
-               {cardItem.map((item) => (
-                 
-                <div key={item.id} className='flex gap-4 flex-col rounded-2xl shadow-md overflow-hidden 
-                transition-transform duration-300 transform hover:scale-105'>
-                 
-                 <div>
-                    <img className='w-full h-48 object-cover transition-transform duration-300 transform 
-                    hover:scale-105'src={item.image} alt={item.name} />
-                 </div>
-
-                 <div className='px-4 pb-4 flex flex-col gap-3'>
-                    
-                    <div className='flex gap-4 flex-wrap justify-between items-center'>
-                        <h3 className='font-medium'>{ item.name }</h3>
-                        <p className='text-secondary text-sm'>Rs.{ item.price }</p>
+    return (
+        <Container>
+            <section>
+                <div className='py-8 flex flex-col gap-8'>
+                    <div className='flex justify-between items-center flex-wrap gap-2'>
+                        <h2 className='text-secondary text-[1.2rem] font-medium md:font-semibold md:text-3xl lg:text-4xl'>{categoryName} Menu</h2>
                     </div>
-                    
-                    <p className='text-gray-600 text-sm'>{ item.description }</p>
-                     <Link to={'/menu'}>
-                        <Button type='button' className='bg-primary text-sm font-medium w-32 sm:max-w-36 
-                        text-center cursor-pointer'>Order now</Button>
-                     </Link>
-                 
-                 </div>
-             
+                    <div className='grid grid-cols-1 sm:grid-cols-2 gap-8 lg:grid-cols-4'>
+                        {/* card */}
+                        { filteredDishes.map((item, idx) => (
+                            <div key={item.id} className='flex gap-4 flex-col rounded-2xl shadow-md overflow-hidden transition-transform duration-300 transform hover:scale-105'>
+                                <div>
+                                    <img 
+                                        className='w-full h-48 object-cover transition-transform duration-300 transform hover:scale-105'
+                                        src={appwriteDishService.getDishImagePreview(item.id)} 
+                                        alt={item.name} 
+                                    />
+                                </div>
+                                <div className='px-4 pb-4 flex flex-col gap-3'>
+                                    <div className='flex gap-4 flex-wrap justify-between items-center'>
+                                        <h3 className='font-medium'>{ item.name }</h3>
+                                        <p className='text-secondary text-sm'>Rs.{ item.price }</p>
+                                    </div>
+                                    <p className='text-gray-600 text-sm'>{ item.description }</p>
+                                    <Link to={!authStatus ? '/login' : ''}>
+                                        <Button 
+                                            onClick={() => orderBtnHandler(item.id, item.name, item.price)}
+                                            type='button' 
+                                            className='bg-primary text-sm font-medium w-32 sm:max-w-36 text-center cursor-pointer'>
+                                                Add to cart
+                                        </Button>
+                                    </Link>
+                                </div>
+                            </div>
+                        )) }
+                        {/* card end */}
+                    </div>
                 </div>
-              
-               ))}
-
-           </div>
-          
-          </div>
-
-      </Container>
-      
-      </section>
-      
-    
-  );
+            </section>
+        </Container>
+    )
 }
-
-export default card;

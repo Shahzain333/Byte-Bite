@@ -17,6 +17,8 @@ import Sidebar from "./dashboard/Sidebar.jsx";
 import DashboardHeader from "./dashboard/DashboardHeader.jsx";
 import AddDishes from "./dashboard/AddDishes.jsx";
 import Table from "./dashboard/Table.jsx";
+import Category from "./Category.jsx";
+
 export { 
     Button,
     Header, 
@@ -25,6 +27,7 @@ export {
     HeroSection,
     Card,
     FreindsSection,
+    Category,
     FAQs,
     Signup,
     Input,

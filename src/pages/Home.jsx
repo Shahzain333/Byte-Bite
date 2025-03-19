@@ -1,5 +1,5 @@
 import React from 'react'
-import { HeroSection, Card, FreindsSection, FAQs } from '../components/index'
+import { HeroSection, Category, FreindsSection, FAQs } from '../components/index'
 
 
 export default function Home(props) {
@@ -7,7 +7,7 @@ export default function Home(props) {
     return (
         <main>
             <HeroSection />
-            <Card /> 
+            <Category /> 
             <FreindsSection />
             <FAQs />
         </main>
