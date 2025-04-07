@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { Input } from '../../components/index';
@@ -6,7 +5,6 @@ import fetchCategories from '../../appwrite/addCategory';
 import { toast } from 'sonner'
 
 export default function ShowCategoryData({isDishAdded}) {
-    
     const { register, handleSubmit, formState: { errors }, setFocus, setValue, getValues } = useForm();
     const [editableDishId, setEditableDishId] = useState(null); // Dish ID in edit mode
     const [dishes, setDishes] = useState([]); // All dishes fetched from the database

@@ -1,4 +1,3 @@
-
 import React from 'react'
 import Input from '../input'
 import Button from '../Button'
@@ -36,7 +35,7 @@ export default function AddCategory(props) {
 
     return (
         <section className='space-y-15'>
-            <DashboardHeader title='Add Dishes'/>
+            <DashboardHeader title='Add Category'/>
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col items-center justify-center mt-10 gap-5 mx-auto'>
                 <div className='flex flex-col gap-4 md:gap-5 md:w-2xl justify-between'>
                     <div className='flex flex-col gap-4'>
@@ -48,10 +47,12 @@ export default function AddCategory(props) {
                             placeholder='Dish Name'
                         />
                         {errors.name && <span className='-mt-4 text-red-500'>{errors.name.message}</span>}
+
+                        <label className='block text-secondary font-medium text-lg -mb-3'>Image:</label>
                         <div className='flex flex-col'>
                              <Input 
                                 {...register('image', { required: "Upload an image" })}
-                                className='w-50 sm:w-72 cursor-pointer'  
+                                className='w-60 sm:w-72 cursor-pointer'  
                                 type='file' 
                                 placeholder='Upload Image' 
                             />
@@ -67,9 +68,7 @@ export default function AddCategory(props) {
                 </div>
             </form>
             <ShowCategoryData isDishAdded={isDishAdded}/>
-
             <div className='h-16'></div>
-
         </section>
     )
 }

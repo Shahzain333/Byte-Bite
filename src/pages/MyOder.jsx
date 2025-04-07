@@ -1,6 +1,5 @@
-
 import React, { useEffect, useState } from 'react';
-import { Button, Container, Input } from '../components/index';
+import { Button, Container, Input } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, increaseQuantity, decreaseQuantity, removeFromCart, clearCart } from '../store/addToCartSlice';
 import orderService from '../appwrite/order'
@@ -9,7 +8,6 @@ import Order from '../components/order';
 import authService from '../appwrite/auth'
 
 export default function MyOrders(props) {
-    
     const dispatch = useDispatch();
     const cart = useSelector(state => state.cart.cart);
     const authData = useSelector((state) => state.auth.userData);    

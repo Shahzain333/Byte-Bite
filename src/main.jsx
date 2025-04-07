@@ -1,4 +1,3 @@
-
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
@@ -11,7 +10,7 @@ import { Toaster } from 'sonner';
 // import react-router-dom
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 // import user pages
-import Home from './pages/Home'
+import Home from './pages/Home.jsx'
 import MyOrder from './pages/MyOder.jsx';
 import Menu from './pages/Menu.jsx';
 import Reservation from './pages/Reservation.jsx';
@@ -19,9 +18,14 @@ import Dashboard from './pages/Dashboard/Dashboard.jsx';
 // import dashboard pages
 import AddDishes from './pages/Dashboard/AddDish.jsx';
 import AddCategory from './pages/Dashboard/AddCategory.jsx';
+import SearchDish from './pages/SearchDish.jsx'
 
 // import components
 import { Signup, Login} from './components/index.js';
+import DashboardLogin from './components/dashboard/Login.jsx'
+import ShowReservation from './components/dashboard/ShowReservation.jsx'
+import Orders from './components/dashboard/Order.jsx'
+import WeekMenu from './components/WeekMenu/WeekMenu.jsx'
 
   const router = createBrowserRouter([
     {
@@ -33,8 +37,8 @@ import { Signup, Login} from './components/index.js';
           element: <Home />
         },
         {
-          path: '/menu/:categoryName',
-          element: <Menu />
+          path: '/category/:categoryName',
+          element: <WeekMenu />
         },
         {
           path: '/reservation',
@@ -52,6 +56,14 @@ import { Signup, Login} from './components/index.js';
           path: '/signup',
           element: <Signup />
         },
+        {
+          path: '/menu',
+          element: <Menu />
+        },
+        {
+          path: '/search',
+          element: <SearchDish />
+        },
       ]
     },
     {
@@ -59,12 +71,24 @@ import { Signup, Login} from './components/index.js';
       element: <Dashboard />,
       children: [
         {
+          path: 'login',
+          element: <DashboardLogin />
+        },
+        {
           path: 'add-dish',
           element: <AddDishes />
         },
         {
           path: 'add-category',
           element: <AddCategory />
+        },
+        {
+          path: 'reservations',
+          element: <ShowReservation />
+        },
+        {
+          path: 'order',
+          element: <Orders />
         },
       ]
     }

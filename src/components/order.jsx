@@ -1,6 +1,5 @@
-
 import React,{useEffect, useState} from 'react'
-import orderService from '../../appwrite/order'
+import orderService from '../appwrite/order'
 import { useSelector } from 'react-redux';
 import { set } from 'react-hook-form';
 

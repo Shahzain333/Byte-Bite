@@ -5,7 +5,6 @@ import dish from '../../appwrite/addDish';
 import { toast } from 'sonner'
 
 export default function Table({isDishAdded}) {
-   
     const { register, handleSubmit, formState: { errors }, setFocus, setValue, getValues } = useForm();
     const [editableDishId, setEditableDishId] = useState(null); // Dish ID in edit mode
     const [dishes, setDishes] = useState([]); // All dishes fetched from the database
@@ -48,9 +47,7 @@ export default function Table({isDishAdded}) {
             dish.originalName.toLowerCase().includes(searchQuery.toLowerCase()) ||
             dish.originalCategory.toLowerCase().includes(searchQuery.toLowerCase()) 
         );
-
         setDisplayDishes(filtered);
-    
     }, [searchQuery, dishes]);
 
     const editButton = (id) => {
@@ -113,7 +110,6 @@ export default function Table({isDishAdded}) {
                 } else {
                     toast.error('Failed to update dish');
                 }
-                
                 setIsUpdating(false);
         }
     };
@@ -139,17 +135,14 @@ export default function Table({isDishAdded}) {
     return (
         <>     
             <div className="relative overflow-x-auto sm:rounded-lg mx-10 mt-4 translate-y-10">
-
                 {/* search bar */}
                 <label htmlFor="table-search" className="sr-only">Search</label>
-
                 <div className="relative mb-2">
                     <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
                         <svg className="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                         </svg>
                     </div>
-
                     <input 
                         type="text" 
                         id="table-search" 
@@ -162,14 +155,12 @@ export default function Table({isDishAdded}) {
             </div>
         
         <form onSubmit={handleSubmit(onSubmit)}>
-
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-10">
-
                 {/* Table */}
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500">
-
                     <thead className="text-xs uppercase bg-secondary text-white">
                         <tr>
+                            <th scope="col" className="text-center px-1 py-3">No.</th>
                             <th scope="col" className="px-6 py-3">Name</th>
                             <th scope="col" className="px-2 py-3">Price</th>
                             <th scope="col" className="px-2 py-3">Category</th>
@@ -178,11 +169,12 @@ export default function Table({isDishAdded}) {
                             <th scope="col" className="px-2 py-3">Action</th>
                         </tr>
                     </thead>
-
                     <tbody>
-
-                        {displayDishes.map((dish1) => (
+                        {displayDishes.map((dish1,index) => (
                             <tr key={dish1.id} className="bg-white border-b border-gray-200 hover:bg-gray-50">
+                                 <th scope="row" className="text-center py-4 font-medium text-gray-900 whitespace-nowrap">
+                                    {index + 1}
+                                </th>
                                 <th scope="row" className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap">
                                     <Input 
                                         {...register(`name_${dish1.id}`, { required: "Enter dish name" })}

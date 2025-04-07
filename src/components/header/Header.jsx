@@ -1,4 +1,3 @@
-
 import React, {useState} from 'react'
 import logo from '../../assets/images/logo.png'
 import Container from '../Container'
@@ -26,6 +25,7 @@ export default function Header() {
         if (response) {
             dispactch(logout())
         }
+        SetisMobileMenuOpen(false)
     }
     return (
         <>
@@ -107,8 +107,10 @@ export default function Header() {
                                         ) : (
                                         <li>
                                             <Link to={'/login'}>
-                                                <Button className='bg-secondary hover: hover:bg-[#3a4a43] transform hover:scale-105 duration-300 text-white px-6 py-2 rounded-full cursor-pointer'>
-                                                    Login
+                                                <Button
+                                                    onClick={() => SetisMobileMenuOpen(false)} 
+                                                    className='bg-secondary hover: hover:bg-[#3a4a43] transform hover:scale-105 duration-300 text-white px-6 py-2 rounded-full cursor-pointer'>
+                                                     Login
                                                 </Button>
                                             </Link>
                                         </li>

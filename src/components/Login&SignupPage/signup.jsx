@@ -1,4 +1,3 @@
-
 import React,{useState} from 'react'
 import Container from '../Container'
 import Input from '../input'
@@ -11,8 +10,13 @@ import hidePasswordImage from '../../assets/images/blind-40.png'
 import { set, useForm } from 'react-hook-form';
 import authService from '../../appwrite/auth';
 import { toast } from 'sonner';
+import { useDispatch } from 'react-redux';
+import { login } from '../../store/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 export default function Signup(props) {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [creatingAccount, setCreatingAccount] = useState(false);
     const [isPasswordsMatch, setisPasswordsMatch] = useState(true)
     const [isPasswordHidden, setisPasswordHidden] = useState(true)
@@ -46,6 +50,9 @@ export default function Signup(props) {
             
             if (userData) {
                 toast.success('Account created successfully');
+                const userData = await authService.getCurrentUser()
+                if(userData) dispatch(login(userData));
+                navigate("/")
             }
         } catch (error) {
             console.log('Signup :: Error creating account: ', error);
@@ -80,7 +87,7 @@ export default function Signup(props) {
                                     )}
                                     label='Full Name' 
                                     type='text' 
-                                    className={`min-w-64 md:min-w-72 ${redBorderONError(errors.fullname)}`} placeholder='Enter your full name' 
+                                    className={`min-w-64 md:min-w-72 pr-14 ${redBorderONError(errors.fullname)}`} placeholder='Enter your full name' 
                                 />
                                 {errors.fullname && <p className="text-red-500 text-sm -mt-4">{errors.fullname.message}</p>}
                                 
@@ -96,7 +103,7 @@ export default function Signup(props) {
                                     )}  
                                     label='Email' 
                                     type='text' 
-                                    className={`min-w-64 md:min-w-72 ${redBorderONError(errors.email)}`} 
+                                    className={`min-w-64 md:min-w-72 pr-14 ${redBorderONError(errors.email)}`} 
                                     placeholder='Enter your email'
                                 />
                                 {errors.email && <p className="text-red-500 text-sm -mt-4">{errors.email.message}</p>}

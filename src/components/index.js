@@ -1,23 +1,21 @@
-
-import Button from "./Button.jsx";
-import Header from "./header/Header.jsx";
-import Footer from "./footer/Footer.jsx"
-import Container from "./Container.jsx";
-import HeroSection from "./heroSection/HeroSection.jsx";
-import Card from "./card/Card.jsx";
-import FreindsSection from "./FreinedsSection.jsx";
-import FAQs from "./faqs/FAQs.jsx";
-import Signup from "./Login&SignupPage/signup.jsx";
-import Input from "./input.jsx";
-import Login from "./Login&SignupPage/login.jsx";
-import ReservationForm from "./reservation/ReservatonForm.jsx";
-import Loader from "./Loader.jsx";
+import Button from "./Button";
+import Header from "../components/header/Header.jsx";
+import Footer from "../components/footer/Footer.jsx"
+import Container from "../components/Container.jsx";
+import HeroSection from "../components/heroSection/HeroSection.jsx";
+import WeekMenu from "../components/WeekMenu/WeekMenu.jsx";
+import FreinedsSection from "../components/FreinedsSection.jsx";
+import FAQs from "../components/faqs/FAQs.jsx";
+import Signup from "../components/Login&SignupPage/signup.jsx";
+import Input from "../components/input.jsx";
+import Login from "../components/Login&SignupPage/Login.jsx";
+import ReservationForm from "../components/reservation/ReservatonForm.jsx";
+import Category from "../components/Category.jsx";
 // Dashboard components
-import Sidebar from "./dashboard/Sidebar.jsx";
-import DashboardHeader from "./dashboard/DashboardHeader.jsx";
-import AddDishes from "./dashboard/AddDishes.jsx";
-import Table from "./dashboard/Table.jsx";
-import Category from "./Category.jsx";
+import Sidebar from "../components/dashboard/Sidebar.jsx";
+import DashboardHeader from "../components/dashboard/DashboardHeader.jsx";
+import AddDishes from "../components/dashboard/AddDishes.jsx";
+import Table from "../components/dashboard//Table.jsx";
 
 export { 
     Button,
@@ -25,15 +23,14 @@ export {
     Footer, 
     Container, 
     HeroSection,
-    Card,
-    FreindsSection,
-    Category,
+    WeekMenu,
+    FreinedsSection,
     FAQs,
     Signup,
     Input,
     Login,
     ReservationForm,
-    Loader,
+    Category,
     Sidebar,
     DashboardHeader,
     AddDishes,

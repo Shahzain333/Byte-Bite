@@ -1,12 +1,13 @@
+
 import { Client, Account, ID, Databases, Query, Storage} from 'appwrite';
 import conf from '../conf/conf';
 
 class appwriteCategory {
- 
     client = new Client();
     account;
     databases;
-    bucket;   
+    bucket;
+    
     constructor() {
         this.client.setEndpoint(conf.appWriteUrl)
         .setProject(conf.appWriteProjectId)

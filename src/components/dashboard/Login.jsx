@@ -9,13 +9,16 @@ import showPasswordImage from '../../assets/images/show-password-48.png'
 import hidePasswordImage from '../../assets/images/blind-40.png'
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner'
-import authService from '../../appwrite/auth'
-import { useDispatch } from 'react-redux';
-import { login } from '../../store/authSlice';
+import authService from '../../appwrite/adminAuth'
+import { useDispatch, useSelector } from 'react-redux';
+import { adminLogin } from '../../store/adminAuthSlice';
+import DashboardHeader from './DashboardHeader'
 
 export default function Login(props) {
     const [isPasswordHidden, setisPasswordHidden] = React.useState(true)
     const { register, handleSubmit, formState: { errors }, setFocus } = useForm();
+    const status1 = useSelector(state => state.adminAuth.status);
+    
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -26,11 +29,12 @@ export default function Login(props) {
             toast.error(sessionResponse.message);
             return;
         }
-        if (sessionResponse) {
-            const userData = await authService.getCurrentUser();
-            dispatch(login(userData));
+        if (sessionResponse.documents.length === 0) {
+            toast.error('Invalid email or password');
+        }else{
+            dispatch(adminLogin());
             toast.success('Login successful');
-            navigate('/')
+            navigate('/dashboard/add-dish');
         }
     }
     useEffect(() => {
@@ -42,7 +46,9 @@ export default function Login(props) {
     }
 
     return (
-        <section className='pt-25 pb-10 flex flex-col items-center'>
+        <>
+        <DashboardHeader title='Dashboard'/>
+        <section className='pt-25 lg:pt-0 pb-10 flex flex-col items-center'>
                 <div className='bg-[#ebf1f4] p-8 lg:pl-10 pb-10 rounded-3xl shadow-md flex flex-row md:gap-12 lg:gap-8 justify-between'>
                     <div className='flex flex-col md:gap-12 md:w-[40%]'>
                         <div className='hidden md:block text-center w-28'>
@@ -96,17 +102,11 @@ export default function Login(props) {
                                 <div>
                                     <Button 
                                         type='submit'
-                                        className='min-w-64 md:min-w-72 bg-primary cursor-pointer font-medium text-white py-2 rounded hover:bg-amber-600 transition duration-300 ease-in-out'>
+                                        className='min-w-[18rem] md:min-w-72 bg-primary cursor-pointer font-medium text-white py-2 rounded hover:bg-amber-600 transition duration-300 ease-in-out'>
                                         Login
                                     </Button>
                                 </div>
                             </form>
-                                
-                            <p className='text-center text-sm'>Don't have an account? 
-                                <Link to='/signup'>
-                                    <span className='font-medium ml-1 hover:text-secondary'>Signup</span>
-                                </Link>
-                            </p>
                         </div>
                     </div>
                     <div className='hidden md:block max-w-[55%]'>
@@ -119,5 +119,6 @@ export default function Login(props) {
                     </div>
                 </div>
         </section>
+        </>
     )
 }
